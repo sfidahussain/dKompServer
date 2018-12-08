@@ -1,17 +1,28 @@
 {
   "name": "groceries-server",
-  "version": "0.0.1",
-  "description": "Groceries server using Mongoose",
+  "version": "1.0.0",
+  "description": "### Express based REST server for serving MongoDB content using Mongoose node module",
   "main": "server.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SWDV-665/groceries-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SWDV-665/groceries-server/issues"
+  },
+  "homepage": "https://github.com/SWDV-665/groceries-server#readme",
   "devDependencies": {
     "body-parser": "1.18.3",
     "cors": "2.8.4",
-    "express": "^4.16.4",
+    "express": "4.16.3",
     "method-override": "2.3.10",
     "mongoose": "5.1.5",
-    "morgan": "^1.9.1"
+    "morgan": "1.9.0"
   }
 }
