@@ -28,7 +28,6 @@ var Grocery = mongoose.model('Grocery', {
     quantity: Number
 });
 
-
 // Get all grocery items
 app.get('/api/groceries', function (req, res) {
 
@@ -36,6 +35,24 @@ app.get('/api/groceries', function (req, res) {
 
     //use mongoose to get all groceries in the database
     Grocery.find(function (err, groceries) {
+
+        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+        if (err) {
+            res.send(err);
+        }
+
+        res.json(groceries); // return all groceries in JSON format
+    });
+});
+
+// db.foo.find( { a : 1 } )   
+// Get one grocery item
+app.get('/api/groceries/:id', function (req, res) {
+
+    console.log("Listing grocery item...");
+
+    //use mongoose to get all groceries in the database
+    Grocery.find({_id: req.params.id}, function (err, groceries) {
 
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err) {

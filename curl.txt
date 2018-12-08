@@ -10,10 +10,15 @@ curl --header "Content-Type: application/json" \
 curl --header "Content-Type: application/json" \
   --request PUT \
   --data '{"name":"Bread","quantity":"4"}' \
-  http://localhost:8080/api/groceries/{id}  
+  http://localhost:8080/api/groceries/5c02f0a41155a156b06a63dc  
 
 
  # Update item
 curl --header "Content-Type: application/json" \
   --request DELETE \
-  http://localhost:8080/api/groceries/{id}   
+  http://localhost:8080/api/groceries/5c02f1d3828c0957068abea4
+
+#Fetch item
+curl --header "Content-Type: application/json" \
+  --request GET \
+  http://localhost:8080/api/groceries/5c02f0a41155a156b06a63dc
