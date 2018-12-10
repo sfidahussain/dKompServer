@@ -7,7 +7,7 @@ var methodOverride = require('method-override');
 var cors = require('cors');
 
 // Configuration
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/groceries");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/dKomp");
 
 app.use(bodyParser.urlencoded({'extended': 'true'}));
 app.use(bodyParser.json());
@@ -23,78 +23,77 @@ app.use(function (req, res, next) {
 });
 
 // Model
-var Grocery = mongoose.model('Grocery', {
-    name: String,
-    quantity: Number
+var Words = mongoose.model('Words', {
+    userName: String,
+    keywords: [{type: String}]
 });
 
-// Get all grocery items
-app.get('/api/groceries', function (req, res) {
+// Get all associated ids with keywords 
+app.get('/api/dKomp', function (req, res) {
 
-    console.log("Listing groceries items...");
+    console.log("Listing ids with keywords...");
 
-    //use mongoose to get all groceries in the database
-    Grocery.find(function (err, groceries) {
+    //use mongoose to get all keywords in the database
+    Words.find(function (err, dKomp) {
 
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err) {
             res.send(err);
         }
 
-        res.json(groceries); // return all groceries in JSON format
+        res.json(dKomp); // return all groceries in JSON format
     });
 });
 
-// db.foo.find( { a : 1 } )   
-// Get one grocery item
-app.get('/api/groceries/:id', function (req, res) {
+// Get one row
+app.get('/api/dKomp/:id', function (req, res) {
 
-    console.log("Listing grocery item...");
+    console.log("Listing dKomp item...");
 
     //use mongoose to get all groceries in the database
-    Grocery.find({_id: req.params.id}, function (err, groceries) {
+    Words.find({_id: req.params.id}, function (err, dKomp) {
 
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err) {
             res.send(err);
         }
 
-        res.json(groceries); // return all groceries in JSON format
+        res.json(dKomp); // return all rows in JSON format
     });
 });
 
-// Create a grocery Item
-app.post('/api/groceries', function (req, res) {
+// Create a row with an id
+app.post('/api/dKomp', function (req, res) {
 
-    console.log("Creating grocery item...");
+    console.log("Creating dKomp row...");
 
-    Grocery.create({
-        name: req.body.name,
-        quantity: req.body.quantity,
+    Words.create({
+        userName: req.body.userName,
+        keywords: req.body.keywords,
         done: false
-    }, function (err, grocery) {
+    }, function (err, dKomp) {
         if (err) {
             res.send(err);
         }
 
-        // create and return all the groceries
-        Grocery.find(function (err, groceries) {
+        // create and return all the rows
+        Words.find(function (err, dKomp) {
             if (err)
                 res.send(err);
-            res.json(groceries);
+            res.json(dKomp);
         });
     });
 
 });
 
-// Update a grocery Item
-app.put('/api/groceries/:id', function (req, res) {
-    const grocery = {
-        name: req.body.name,
-        quantity: req.body.quantity
+// Update an Item
+app.put('/api/dKomp/:id', function (req, res) {
+    const row = {
+        userName: req.body.userName,
+        keywords: req.body.keywords
     };
     console.log("Updating item - ", req.params.id);
-    Grocery.update({_id: req.params.id}, grocery, function (err, raw) {
+    Words.update({_id: req.params.id}, row, function (err, raw) {
         if (err) {
             res.send(err);
         }
@@ -103,21 +102,21 @@ app.put('/api/groceries/:id', function (req, res) {
 });
 
 
-// Delete a grocery Item
-app.delete('/api/groceries/:id', function (req, res) {
-    Grocery.remove({
+// Delete a dKomp Item
+app.delete('/api/dKomp/:id', function (req, res) {
+    Words.remove({
         _id: req.params.id
-    }, function (err, grocery) {
+    }, function (err, dKomp) {
         if (err) {
-            console.error("Error deleting grocery ", err);
+            console.error("Error deleting ", err);
         }
         else {
-            Grocery.find(function (err, groceries) {
+            Words.find(function (err, dKomp) {
                 if (err) {
                     res.send(err);
                 }
                 else {
-                    res.json(groceries);
+                    res.json(dKomp);
                 }
             });
         }
@@ -127,4 +126,4 @@ app.delete('/api/groceries/:id', function (req, res) {
 
 // Start app and listen on port 8080  
 app.listen(process.env.PORT || 8080);
-console.log("Grocery server listening on port  - ", (process.env.PORT || 8080));
+console.log("dKomp server listening on port  - ", (process.env.PORT || 8080));

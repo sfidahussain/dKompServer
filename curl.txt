@@ -1,24 +1,23 @@
 
 
 # Create item
-curl --header "Content-Type: application/json" \
-  --request POST \
-  --data '{"name":"Bread","quantity":"2"}' \
-  http://localhost:8080/api/groceries
+curl --header "Content-Type: application/json" --request POST \
+  --data '{"userName":"bobsmith","keywords":"Taylor Swift", "Pop"}' \
+  http://localhost:8080/api/dKomp
 
 # Update item
 curl --header "Content-Type: application/json" \
   --request PUT \
   --data '{"name":"Bread","quantity":"4"}' \
-  http://localhost:8080/api/groceries/5c02f0a41155a156b06a63dc  
+  http://localhost:8080/api/dKomp/5c02f0a41155a156b06a63dc  
 
 
- # Update item
+ # Delete item
 curl --header "Content-Type: application/json" \
   --request DELETE \
-  http://localhost:8080/api/groceries/5c02f1d3828c0957068abea4
+  http://localhost:8080/api/dKomp/5c0dafbaffef5013e1473a96
 
 #Fetch item
 curl --header "Content-Type: application/json" \
   --request GET \
-  http://localhost:8080/api/groceries/5c02f0a41155a156b06a63dc
+  http://localhost:8080/api/dKomp/5c02f0a41155a156b06a63dc
